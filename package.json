@@ -1,0 +1,18 @@
+{
+  "name": "hamtaro.js",
+  "version": "0.0.0",
+  "description": "Javascript files for front-end development with Hamtaro framework.",
+  "keywords": [
+    "hamtaro.js"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phil'dy Jocelyn Belcou <pj.belcou@gmail.com> (https://www.linkedin.com/in/phildy-belcou)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "jquery": "^3.6.0"
+  }
+}
