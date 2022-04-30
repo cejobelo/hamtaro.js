@@ -2,6 +2,10 @@
   "name": "hamtaro.js",
   "version": "0.0.0",
   "description": "Javascript files for front-end development with Hamtaro framework.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cejobelo/hamtaro.js.git"
+  },
   "keywords": [
     "hamtaro.js"
   ],
