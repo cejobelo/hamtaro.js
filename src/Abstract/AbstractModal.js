@@ -6,8 +6,6 @@ import { AbstractComponent } from 'hamtaro.js';
  * @author Phil'dy Jocelyn Belcou <pj.belcou@gmail.com>
  */
 export class AbstractModal extends AbstractComponent {
-  bEventsInitialized = false;
-
   /**
    * Returns the custom selector.
    *
