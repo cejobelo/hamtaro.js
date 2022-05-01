@@ -43,8 +43,10 @@ export class AbstractEvent {
   /**
    * Handler.
    *
+   * @param {object }event
+   * @param {HTMLElement} element
    * @return {void}
    */
-  handler() {
+  handler(event, element) {
   }
 }
