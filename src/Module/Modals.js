@@ -19,14 +19,13 @@ class ModalsModuleClass extends AbstractModule {
      * @return {void}
      */
     closeCurrent() {
-        let ModalElement = document.querySelector('.modal.show[ctrl]'),
-            ModalInstance = this.get(ModalElement.dataset.ctrl);
-
+        let ModalElement = document.querySelector('.modal.show[ctrl]');
         if (!ModalElement) {
             return;
         }
 
-        let DialogElement = document.querySelector('.modal.show .modal-dialog');
+        let ModalInstance = this.get(ModalElement.dataset.ctrl),
+            DialogElement = document.querySelector('.modal.show .modal-dialog');
 
         if (ModalInstance) {
             DialogElement.classList.add('fadeOut');
