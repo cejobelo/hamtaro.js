@@ -1,4 +1,5 @@
 import { AbstractModule, Ajax, Events, App } from 'hamtaro.js';
+const bootstrap = require('bootstrap');
 
 /**
  * Modals module.
@@ -19,18 +20,13 @@ class ModalsModuleClass extends AbstractModule {
      * @return {void}
      */
     closeCurrent() {
-        let ModalElement = document.querySelector('.modal.show[ctrl]');
+        let ModalElement = document.querySelector('.modal.show[data-ctrl]');
         if (!ModalElement) {
             return;
         }
 
-        let ModalInstance = this.get(ModalElement.dataset.ctrl),
-            DialogElement = document.querySelector('.modal.show .modal-dialog');
-
-        if (ModalInstance) {
-            DialogElement.classList.add('fadeOut');
-            DialogElement.classList.remove('slideInDown');
-        }
+        let Modal = this.get(ModalElement.dataset.ctrl);
+        Modal.BsInstance.hide();
     }
 
     /**
@@ -52,6 +48,8 @@ class ModalsModuleClass extends AbstractModule {
         if (ModalElement) {
             let oEvent = new Event('show.modal');
 
+            Events.bindEventHandlers();
+
             // Adds the additional params
             if (oData && !oData.hasOwnProperty('modal')) {
                 oEvent['ModalData'] = oData;
@@ -63,19 +61,27 @@ class ModalsModuleClass extends AbstractModule {
                 App.urlParam('modal', urlid);
             }
 
-            ModalElement.dispatchEvent(oEvent);
-
-            let oModal = window.MODALS[ctrl];
-
-            if (oModal) {
-                oModal.show(oEvent);
+            let BackdropDiv = document.querySelector('#HamtaroModalBackdrop div');
+            if (BackdropDiv) {
+                BackdropDiv.remove();
             }
 
-            ModalElement.classList.add('show');
-            document.querySelector('body').classList.add('modal-open');
+            let BootstrapModal = new bootstrap.Modal(ModalElement, {
+                backdrop: !Boolean(document.querySelector('.modal-backdrop')),
+            });
 
-            $('body').append('<div class="modal-backdrop fade show"></div>');
-            $(ModalElement).find('.modal-dialog').addClass('slideInDown');
+            BootstrapModal.show();
+
+            ModalElement.dispatchEvent(oEvent);
+
+            let Modal = window.MODALS[ctrl];
+
+            Modal.BsInstance = BootstrapModal;
+
+            if (Modal) {
+                Modal.show(oEvent);
+            }
+
             Events.bindEventHandlers();
         } else {
             if (this.loading) {
@@ -93,13 +99,14 @@ class ModalsModuleClass extends AbstractModule {
             $('#HamtaroModalBackdrop').animate({opacity: 0.5}, 0, function () {
                 return Ajax.loadModal(ctrl, oData).then((AxiosResponse) => {
                     if (AxiosResponse['data']['success']) {
-                        $('#HamtaroModalBackdrop').remove();
+                        //$('#HamtaroModalBackdrop').remove();
 
                         _this.loading = false;
 
                         _this.initModalResponse(AxiosResponse['data']);
                     } else {
                         _this.loading = false;
+                        console.error(AxiosResponse['data']);
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -136,8 +143,7 @@ class ModalsModuleClass extends AbstractModule {
         let $modal = $(html);
         $('body').append($modal);
 
-        // The modal class
-        let oModal = window.MODALS[ctrl];
+        let oModal = this.get(ctrl);
 
         if (oModal) {
             oModal.init(jsData);

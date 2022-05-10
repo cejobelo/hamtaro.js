@@ -7,6 +7,13 @@ import { AbstractComponent } from 'hamtaro.js';
  */
 export class AbstractModal extends AbstractComponent {
   /**
+   * The Bootstrap modal instance.
+   *
+   * @type {null}
+   */
+  BsInstance = null;
+
+  /**
    * Returns the custom selector.
    *
    * @return {string}
