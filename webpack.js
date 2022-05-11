@@ -2,17 +2,19 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+  mode: 'production',
+
   optimization: {
     minimize: true,
   },
 
   entry: [
     'babel-polyfill',
-    path.join(__dirname, '../../../vendor/cejobelo/hamtaro/src/Javascript/main.js'),
+    path.join(__dirname, '../../vendor/cejobelo/hamtaro/src/main.js'),
   ],
 
   output: {
-    path: path.join(__dirname, '../../../public'),
+    path: path.join(__dirname, '../../public'),
     publicPath: '/',
     filename: 'main.min.js'
   },
