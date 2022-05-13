@@ -1,4 +1,5 @@
 import { AbstractModule, Ajax, Events, App } from 'hamtaro.js';
+import $ from 'jquery';
 const bootstrap = require('bootstrap');
 
 /**
