@@ -30,7 +30,9 @@
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
-    "jquery": "^3.6.0"
+    "core-js": "^3.22.5",
+    "jquery": "^3.6.0",
+    "regenerator-runtime": "^0.13.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
