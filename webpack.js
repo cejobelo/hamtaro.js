@@ -9,8 +9,8 @@ module.exports = {
   },
 
   entry: [
-    'babel-polyfill',
     path.join(__dirname, '../../vendor/cejobelo/hamtaro/src/main.js'),
+    path.join(__dirname, '../../src/main.js')
   ],
 
   output: {
